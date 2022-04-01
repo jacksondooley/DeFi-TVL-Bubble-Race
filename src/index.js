@@ -10,5 +10,5 @@ document.addEventListener("DOMContentLoaded", () => {
     new Example(main);
     let test_fetch = new Fetch('dog');
     test_fetch.fatch(test_fetch.protocols_api);
-    const ul = document
+    test_fetch.fillList();
 });

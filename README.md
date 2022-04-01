@@ -20,7 +20,7 @@ In addition, this project will include:
 
 1. Title
 2. Visualizer
-3. Light/Dark Mode
+3. Light/Dark Mode (Bonus)
 4. Play/Pause Button
 5. Slider to adjust date
 6. Reset button
@@ -29,7 +29,7 @@ In addition, this project will include:
 
 ## Technologies, Libraries, APIs
 * D3.js used to render the bar chart
-* Alchemy.js and Etherscan.io APIs to get historical data
+* DeFiLlama APIs to get historical data
 
 ## Implementation Timeline
 * Friday: Setup project and get APIs working.
