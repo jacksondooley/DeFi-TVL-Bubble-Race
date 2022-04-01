@@ -12,3 +12,13 @@
 * Nav links
 * Dark/Light Mode
 * Chain Selector
+
+Resources:
+
+ https://www.epochconverter.com/
+ https://observablehq.com/@d3/bar-chart-race-explained
+ https://observablehq.com/@mootari/range-slider#doc_examples
+ https://docs.llama.fi/list-your-project/defillama-and-our-methodology
+ https://defillama.com
+ https://defillama.com/docs/api
+ https://towardsdatascience.com/access-crypto-and-defi-apis-891f99b14b38
