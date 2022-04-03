@@ -18,6 +18,7 @@ Resources:
  https://www.epochconverter.com/
  https://observablehq.com/@d3/bar-chart-race-explained
  https://observablehq.com/@mootari/range-slider#doc_examples
+ https://observablehq.com/@mbostock/scrubber
  https://docs.llama.fi/list-your-project/defillama-and-our-methodology
  https://defillama.com
  https://defillama.com/docs/api

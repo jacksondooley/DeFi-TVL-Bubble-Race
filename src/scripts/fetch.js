@@ -26,10 +26,10 @@ class Fetch {
       }
     })
     .then((data) =>  {
-      
-      for (let i = 0; i < 100; i++){
+      console.log(data)
+      for (let i = 0; i < 10; i++){
         let li = document.createElement("li");
-        li.innerText = data[i].name;
+        li.innerText = `${data[i].name}: ${data[i].tvl}`;
         this.list.appendChild(li);
       }
     }
@@ -46,14 +46,11 @@ class Fetch {
       }
     })
     .then((data) =>  {
-      
-      for (let i = 0; i < 100; i++){
+        console.log(data);
         let li = document.createElement("li");
-        li.innerText = data[i].name;
+        li.innerText = data.chainTvls.Ethereum.tvl[0].date;
         this.list.appendChild(li);
-      }
-    }
-      );
+    });
   }
 }
 
