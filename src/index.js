@@ -20,5 +20,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // .node()
     console.log(d3)
     let graph = new Bars();
-    graph.create1()
+    // graph.create1()
+    graph.create2()
+    // let body = d3.select("body")
+      
+    // let svg = body.append("svg")
+    //   .attr("width", 50)
+    //   .attr("height", 50)
+
+    // let circle = svg.append("circle")
+    //   .attr("cx", 25)
+    //   .attr("cy", 25)
+    //   .attr("r", 25)
+    //   .style("fill", "purple");
+
+    let theData = [ 1, 2, 3 ];
+
+    let p = d3.select("body").selectAll("p")
+        .data(theData)
+        .enter()
+        .append("p")
+        .text("hello")
+
+    
 });
+
