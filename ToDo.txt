@@ -12,6 +12,7 @@
 * Nav links
 * Dark/Light Mode
 * Chain Selector
+* Use observablehq libary to make width adaptive to screen size
 
 Resources:
 

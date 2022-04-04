@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     new Example(main);
     let test_fetch = new Fetch('dog');
     // test_fetch.fatch(test_fetch.protocols_api);
-    // test_fetch.fillList();
+    test_fetch.fillList();
     // test_fetch.MKRFillList();
     // d3.select("div")
     // .style("color", "white")
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(d3)
     let graph = new Bars();
     // graph.create1()
-    graph.create2()
+    graph.createSample();
     // let body = d3.select("body")
       
     // let svg = body.append("svg")

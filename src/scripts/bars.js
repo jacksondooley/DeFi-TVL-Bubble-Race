@@ -1,3 +1,5 @@
+
+
 class Bars {
     constructor(){
         this.body = d3.select("body")
@@ -9,59 +11,38 @@ class Bars {
             { id: 'd4', value: 6, region: 'Germany'},
         ];
     }
-    
-    create1() {
-        // create empty chart container
-        const div = d3.select("#graph")
-
-        //apply styles
-        div.style("font", "10px sans-serif");
-        div.style("text-align", "right");
-        div.style("color", "white");
-
-        //define the initial selection for the bars
-        const bar = div.selectAll("div")
-        const barUpdate = bar.data(this.sampleData);
-        
-        const barNew = barUpdate.join("div");
-
-        barNew.style("background", "steelblue");
-        barNew.style("padding", "3px");
-        barNew.style("margin", "1px");
-
-        barNew.style("width", d => `${d * 10}px`);
-
-        barNew.text(d => d);
-
-        return div.node()
-
-    }
-
-    create2(){
+    createSample(){
         const data = this.sampleObj
-        let width = 420
-        let x = d3.scaleLinear()
+        console.log(data)
+        const width = 420
+        const height = 500
+        const margin = ({top: 20, right: 0, bottom: 30, left: 40})
+
+        const x = d3.scaleLinear()
             .domain([0, d3.max(data, d => d.value)])
             .range([0, width])
 
-        let y = d3.scaleBand()
+        const y = d3.scaleBand()
             .domain(data.map(d => d.region))
             .range([0, 20 * data.length])
 
         
         const svg = this.body.append("svg")
-            .attr("width", width)
-            .attr("height", y.range()[1])
+            .attr("viewBox", [-10, -20, width + 50, height])
+            // .attr("width", width)
+            // .attr("height", y.range()[1])
             .attr("font-family", "sans-serif")
             .attr("font-size", "10")
             .attr("text-anchor", "end");
+
+
       
         const bar = svg.selectAll("g")
           .data(data)
           .enter()
           .append("g")
-            .attr("transform", d => `translate(0,${y(d.region)})`);
-      
+            .attr("transform", d => `translate(0,${y(d.region)})`)
+
         bar.append("rect")
             .attr("fill", "steelblue")
             .attr("width", d => x(d.value))
@@ -73,6 +54,61 @@ class Bars {
             .attr("y", y.bandwidth() / 2)
             .attr("dy", "0.35em")
             .text(d => d.value);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(0,${0})`)
+            .call(d3.axisTop(x))
+            
+        
+    }
+
+    createReal(data){
+        const width = 420
+        const height = 500
+        const margin = ({top: 20, right: 0, bottom: 30, left: 40})
+        const x = d3.scaleLinear()        
+            .domain([0, d3.max(data, d => d.name)])
+            .range([0, width]);
+
+
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.name))
+            .range([0, 20 * data.length])
+
+        
+        const svg = this.body.append("svg")
+            .attr("viewBox", [-10, -20, width + 50, height])
+            // .attr("width", width)
+            // .attr("height", y.range()[1])
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "10")
+            .attr("text-anchor", "end");
+
+
+      
+        const bar = svg.selectAll("g")
+          .data(data)
+          .enter()
+          .append("g")
+            .attr("transform", d => `translate(0,${y(d.name)})`)
+
+        bar.append("rect")
+            .attr("fill", "steelblue")
+            .attr("width", d => x(d.tvl))
+            .attr("height", y.bandwidth() - 1);
+      
+        bar.append("text")
+            .attr("fill", "white")
+            .attr("x", d => x(d.tvl) - 3)
+            .attr("y", y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .text(d => d.name);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(0,${0})`)
+            .call(d3.axisTop(x))
+            
+        
     }
 
 }

@@ -17,23 +17,25 @@ class Fetch {
     .then((data) => console.log(data));
   }
 
-  fillList(){
-    fetch(this.protocols_api)
+  async fillList(){
+    return fetch(this.protocols_api)
     .then((res) => {
     if (res.ok) {
       console.log("success");
       return res.json();
       }
-    })
-    .then((data) =>  {
-      console.log(data)
-      for (let i = 0; i < 10; i++){
-        let li = document.createElement("li");
-        li.innerText = `${data[i].name}: ${data[i].tvl}`;
-        this.list.appendChild(li);
-      }
-    }
-      );
+    });
+    // .then((data) =>  {
+    //   const dataArr = []
+    //   for (let i = 0; i < 10; i++){
+    //     const hash = {}
+    //     hash["name"] = data[i].name
+    //     hash["tvl"] = Math.floor(data[i].tvl)
+    //     dataArr.push(hash)
+    //   }
+    //   console.log(dataArr)
+    //   return dataArr
+    // }
   }
 
   // first 100 tvls for eth
@@ -53,5 +55,23 @@ class Fetch {
     });
   }
 }
+
+  async function getData(url = this.protocols_api) {
+    // We set a default value for the url to our api. This is recommended, but not required.
+
+    // We await our fetch, which will return a promise object
+    // Because we're using the await keyword, 
+        // we have declared getData with to be an async function
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json() 
+    // response.json() parses JSON response into native JavaScript objects
+    // response.json() is asynchronous
+    return data
+}
+
+
 
 export default Fetch;
