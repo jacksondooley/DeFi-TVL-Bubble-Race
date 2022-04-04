@@ -7,7 +7,7 @@ import Fetch from "./scripts/fetch";
 import Bars from "./scripts/bars";
 import DataFetcher from "./scripts/data_fetcher";
 import barChart from "./scripts/barChart";
-import ethData from "./data/ethData"
+import ethData from "./data/ethData";
 
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
