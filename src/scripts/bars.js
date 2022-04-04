@@ -15,7 +15,7 @@ class Bars {
         const data = this.sampleObj
         console.log(data)
         const width = 420
-        const height = 500
+        const height = 200
         const margin = ({top: 20, right: 0, bottom: 30, left: 40})
 
         const x = d3.scaleLinear()
@@ -29,6 +29,7 @@ class Bars {
         
         const svg = this.body.append("svg")
             .attr("viewBox", [-10, -20, width + 50, height])
+
             .attr("font-family", "sans-serif")
             .attr("font-size", "10")
             .attr("text-anchor", "end");
