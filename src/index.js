@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Hello world!");
+  console.log("DOMContentLoaded");
 });
 
 import Example from "./scripts/functionality";
@@ -14,24 +14,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
     new Example(main);
 
-    // let graph = new Bars();
+    let graph = new Bars();
 
-    // graph.createSample();
+    graph.createSample();
 
-    // DataFetcher.getProctocols()
-    // .then((data) => {
-    //   console.log(data);
-    //   graph.createReal(data);
-    // });
+    DataFetcher.getProctocols()
+    .then((data) => {
+      console.log(data);
+      graph.createReal(data);
+    });
 
     // let race = new barChart("5", "yes");
     // console.log(race);
-    let data = new Data();
-    data.testLogger();
+    // let data = new Data();
+    // console.log(data.width);
+    // data.testLogger();
     // data.datesArr();
-    data.getNames();
-    data.groupDates();
-    // data.rank(name => this.datevalues[0][1].get(name));
-    
+    // data.getNames();
+    // data.groupDates();
+
+    // data.rank(name => data.datevalues[10][1].get(name) || 0);
+    // console.log(data.datevalues);
+    // console.log(data.keyframes);
+    // data.nameframes();
+    // console.log(data.nameframes);
 });
 
