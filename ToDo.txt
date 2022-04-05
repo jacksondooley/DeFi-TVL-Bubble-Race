@@ -1,4 +1,5 @@
 
+ToDo:
 
 * Get Bars to render
 * Get Bars to change size
@@ -6,13 +7,16 @@
 * Add Play/Pause button
 * Add Reset button
 * Add date slider
-* Epoch time conversion
-* Insert data
+* Add yams data
 * Prettify
 * Nav links
 * Dark/Light Mode
 * Chain Selector
 * Use observablehq libary to make width adaptive to screen size
+
+Done:
+* Insert data
+* Epoch time conversion
 
 Resources:
 

@@ -7,7 +7,8 @@ import Fetch from "./scripts/fetch";
 import Bars from "./scripts/bars";
 import DataFetcher from "./scripts/data_fetcher";
 import barChart from "./scripts/barChart";
-import ethData from "./data/ethData";
+import Data from "./data/dataGrouping";
+// import dataGrouping from "./data/dataGrouping";
 
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
@@ -25,8 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // let race = new barChart("5", "yes");
     // console.log(race);
-
-    ethData.getEthData();
+    let data = new Data();
+    data.testLogger();
+    // data.datesArr();
+    data.getNames();
+    data.groupDates();
+    // data.rank(name => this.datevalues[0][1].get(name));
     
 });
 
