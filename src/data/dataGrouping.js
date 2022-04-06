@@ -1,10 +1,11 @@
-// import { color } from "d3";
-// import { transition } from "d3";
+import { color } from "d3";
+import { transition } from "d3";
 // import { debug } from "webpack";
 
-// class Data{
-//   constructor(){
-//     this.rawData = require("./data.json");
+class Data{
+  constructor(){
+    this.rawData = require("./data.json");
+    // console.log(this.rawData);
 //     this.n = 10; //number of protocols on graph
 //     this.k = 10; //number of animations per time period; higher k = smoother
 //     this.svg = d3.select("#chart");
@@ -16,7 +17,7 @@
 //     this.height = 400
 //     this.duration = 250
 //     // this.renderChart()
-//   }
+  }
 
 //   testLogger(){
 //     console.log("in data grouping");
@@ -27,39 +28,63 @@
 //     return this.margin.top + this.barsize * this.n + this.margin.bottom
 //   }
 
-//   // datesArr(){
-//   //   const maker = this.rawData[2];
-//   //   const dates = maker.ethTvlHistory.map(m => m.date);
-//   //   this.dates = dates;
-//   //   console.log(this.dates);
-//   // }
+  // datesArr(){
+  //   const maker = this.rawData[2];
+  //   const dates = maker.ethTvlHistory.map(m => m.date);
+  //   this.dates = dates;
+  //   console.log(this.dates);
+  // }
 
-//   // gets names of all the protocols
-//   getNames(){
-//     this.names = new Set(this.rawData.map(d => d.name));
-//     console.log(this.names);
-//   }
+  // gets names of all the protocols
+  getNames(){
+    this.names = new Set(this.rawData.map(d => d.name));
+    console.log(this.names)
+  }
 
 //   // groups protocols and tvls by date
-//   groupDates(){
-//     const grouped = d3.group(this.rawData, d => d.name);
-//     console.log(grouped);
-//     let data = this.rawData;
-//     let datevalues = Array.from(d3.rollup(data, ([d]) => d.tvlUSD, d => d.date, d => d.name))
-//       .map(([date, data]) => [new Date(date), data])
-//       .sort(([a], [b]) => d3.ascending(a, b));
-//     console.log(datevalues)
-//     this.datevalues = datevalues
-//   }
+  groupDates(){
+    const grouped = d3.groups(this.rawData, d => d.category);
+    console.log(grouped)
+
+    let data = this.rawData;
+    console.log(data)
+    let datevalues = Array.from(d3.rollup(data, ([d]) => d.tvlUSD, d => d.date, d => [d.name, d.category]))
+      // .map(([date, data]) => [date, data.])
+      // .sort(([a], [b]) => d3.ascending(a, b));
+    console.log(datevalues)
+    this.datevalues = datevalues
+  }
+
+  dataSetGroup(){
+    const hashArr = []
+    for(let i = 0; i < this.datevalues.length; i++){
+      let hash = {}
+      hash["date"] = this.datevalues[i][0];
+      hash["dataSet"] = []
+      
+      let keys = [...this.datevalues[i][1].keys()]
+      let values = [...this.datevalues[i][1].values()]
+      for (let i = 0; i < keys.length; i++){
+        let protocol = {}
+        protocol["name"] = keys[i][0];
+        protocol["category"] = keys[i][1]
+        protocol["value"] = values[i]
+        hash["dataSet"].push(protocol)
+      }
+      // console.log(values)
+      hashArr.push(hash)
+    }
+    return hashArr
+  }
 
 //   // ranks by value and assigns rank
-//   rank(value) {
-//     const data = Array.from(this.names, name => ({name, value: value(name)}));
-//     data.sort((a, b) => d3.descending(a.value, b.value));
-//     for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(this.n, i);
-//     // console.log(data)
-//     return data;
-//   }
+  // rank(value) {
+  //   const data = Array.from(this.names, name => ({name, value: value(name)}));
+  //   data.sort((a, b) => d3.descending(a.value, b.value));
+  //   for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(this.n, i);
+  //   // console.log(data)
+  //   return data;
+  // }
 
 //   // frames used between months to linearly interpolate values between given dates
 //   keyframes() {
@@ -262,7 +287,7 @@
 
 
 
-// }
+}
 
 
-// export default Data;
+export default Data;

@@ -8,7 +8,7 @@ export function BarChartRace(chartId, extendedSettings) {
     titlePadding: 5,
     columnPadding: 0.4,
     ticksInXAxis: 5,
-    duration: 3500,
+    duration: 5000,
     ...extendedSettings
   };
 
@@ -41,9 +41,9 @@ export function BarChartRace(chartId, extendedSettings) {
   chartContainer.select(".current-date")
     .attr("transform", `translate(${chartSettings.innerWidth} ${chartSettings.innerHeight})`)
 
-  function draw({ dataset, date: currentDate }, transition) {
-    // const { innerHeight, ticksInXAxis, titlePadding } = chartSettings;
-    const dataSetDescendingOrder = chartDataSets.sort(
+  function draw({ dataSet, date: currentDate }, transition) {
+    const { innerHeight, ticksInXAxis, titlePadding } = chartSettings;
+    const dataSetDescendingOrder = dataSet.sort(
       ({ value: firstValue }, { value: secondValue }) =>
         secondValue - firstValue
     );
@@ -54,7 +54,7 @@ export function BarChartRace(chartId, extendedSettings) {
     yAxisScale.domain(dataSetDescendingOrder.map(({name}) => name));
 
     xAxisContainer.transition(transition).call(
-      d3.axisTop(xAxisScale).ticks(chartSettings.ticksInXAxis).tickSize(-innerHeight));
+      d3.axisTop(xAxisScale).ticks(ticksInXAxis).tickSize(-innerHeight));
 
     yAxisContainer.transition(transition).call(d3.axisLeft(yAxisScale).tickSize(0));
 
@@ -67,7 +67,7 @@ export function BarChartRace(chartId, extendedSettings) {
       .enter()
       .append("g")
       .attr("class", "column-container")
-      .attr("transform", `translate(0, ${chartSettings.innerHeight})`);
+      .attr("transform", `translate(0, ${innerHeight})`);
 
     barGroupsEnter
       .append("rect")
@@ -94,35 +94,35 @@ export function BarChartRace(chartId, extendedSettings) {
     barUpdate
       .transition(transition)
       .attr("transform", ({ name }) => `translate(0,${yAxisScale(name)})`)
-      .attr("fill", "black");
+      .attr("fill", ({ category }) => colorBar(category));
 
     barUpdate
       .select(".column-rect")
       .transition(transition)
-      .attr("width", ({ value }) => xAxisScale(value));
+      .attr("width", ({ value }) => xAxisScale(value) - titlePadding);
 
     barUpdate
       .select(".column-title")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) - chartSettings.titlePadding);
+      .attr("x", ({ value }) => xAxisScale(value) + titlePadding);
 
     barUpdate
       .select(".column-value")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) + chartSettings.titlePadding);
-      // .tween("text", function({ value }) {
-      //   const interpolateStartValue =
-      //     elapsedTime === chartSettings.duration 
-      //     ? this.currentValue || 0 : 
-      //     +this.innerHTML;
+      .attr("x", ({ value }) => xAxisScale(value) + chartSettings.titlePadding)
+      .tween("text", function({ value }) {
+        const interpolateStartValue =
+          elapsedTime === chartSettings.duration 
+          ? this.currentValue || 0 : 
+          +this.innerHTML;
 
-      //   const interpolate = d3.interpolate(interpolateStartValue, value);
-      //   this.currentValue = value;
+        const interpolate = d3.interpolate(interpolateStartValue, value);
+        this.currentValue = value;
 
-      //   return function(t) {
-      //     d3.select(this).text(Math.ceil(interpolate(t)));
-      //   };
-      // });
+        return function(t) {
+          d3.select(this).text(Math.ceil(interpolate(t)));
+        };
+      });
 
     const bodyExit = barGroups.exit();
 
@@ -147,17 +147,47 @@ export function BarChartRace(chartId, extendedSettings) {
       .select(".column-value")
       .transition(transition)
       .attr("x", xAxisScale)
-      // .tween("text", function() {
-      //   const interpolate = d3.interpolate(this.currentValue, 0);
-      //   this.currentValue = 0;
+      .tween("text", function() {
+        const interpolate = d3.interpolate(this.currentValue, 0);
+        this.currentValue = 0;
 
-      //   return function(t) {
-      //     d3.select(this).text(Math.ceil(interpolate(t)));
-      //   };
-      // });
+        return function(t) {
+          d3.select(this).text(Math.ceil(interpolate(t)));
+        };
+      });
 
 
     return this;
+  }
+
+  function colorBar(category){
+    if (category === "Dexes") {
+      return "#4e79a7";
+    }
+    else if (category === "Lending") {
+        return "#59a14f";
+    }
+    else if (category === "Bridge") {
+        return "#af7aa1";
+    }
+    else if (category === "Liquid Staking") {
+        return "#586EFC"; //Purple / Blue
+    }
+    else if (category === "Yield") {
+        return "#2CFF53"; //Green
+    }
+    else if (category === "CDP") {
+        return "#B645E6"; //Purple
+    }
+    else if (category === "Algo-Stables") {
+        return "#FE4C4C"; //Red
+    }
+    else if (category === "Yield Aggregator") {
+        return "#45DDE6"; //light blue
+    }
+    else {
+        return "brown";
+    }
   }
 
   function addDataset(dataset) {

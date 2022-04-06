@@ -12,17 +12,26 @@ import { generateDataSets } from "./scripts/dataGenerator";
 import { BarChartRace } from "./scripts/barChartRace";
 
 import { select as d3Select } from "d3";
+import Data from "./data/dataGrouping";
 // import dataGrouping from "./data/dataGrouping";
 
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
     new Example(main);
+    
 
+    console.log(generateDataSets({ size: 5 }));
+
+    const data = new Data();
+    data.groupDates();
+    // data.getNames();
+    const ethData = data.dataSetGroup();
+    console.log(ethData);
     const myChart = new BarChartRace("bar-chart-race");
 
     myChart
       .setTitle("DeFi TVL Bar Chart Race")
-      .addDatasets(generateDataSets({ size: 5 }))
+      .addDatasets(ethData)
       .render();
 
       d3Select("button").on("click", function() {
