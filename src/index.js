@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOMContentLoaded");
+  console.log("DOMContent is Loaded");
 });
 
 import Example from "./scripts/functionality";
@@ -14,19 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const main = document.getElementById("main");
     new Example(main);
 
-    let graph = new Bars();
+    // let graph = new Bars();
 
-    graph.createSample();
+    // graph.createSample();
 
-    DataFetcher.getProctocols()
-    .then((data) => {
-      console.log(data);
-      graph.createReal(data);
-    });
+    // DataFetcher.getProctocols()
+    // .then((data) => {
+    //   console.log(data);
+    //   graph.createReal(data);
+    // });
 
     // let race = new barChart("5", "yes");
     // console.log(race);
-    // let data = new Data();
+    let chart = new Data();
+    // data.testLogger();
+    chart.renderChart();
+    console.log("render time")
     // console.log(data.width);
     // data.testLogger();
     // data.datesArr();

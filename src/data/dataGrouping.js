@@ -1,5 +1,6 @@
 import { color } from "d3";
 import { transition } from "d3";
+import { debug } from "webpack";
 
 class Data{
   constructor(){
@@ -8,12 +9,22 @@ class Data{
     this.k = 10; //number of animations per time period; higher k = smoother
     this.svg = d3.select("#chart");
     this.width = this.svg.node().clientWidth;
-    this.height = this.svg.node().clientHeight;
+    this.barSize = 48;
+    this.margin = ({top: 16, right: 6, bottom: 6, left: 0})
+    // this.height = this.svg.node().clientHeight;
+    // this.height = this.height()
+    this.height = 400
+    this.duration = 250
+    // this.renderChart()
   }
 
   testLogger(){
     console.log("in data grouping");
     console.log(this.rawData);
+  }
+
+  height(){
+    return this.margin.top + this.barsize * this.n + this.margin.bottom
   }
 
   // datesArr(){
@@ -68,18 +79,18 @@ class Data{
     return keyframes;
   }
 
-  nameframes() {
+  nameFrames() {
     const nameframes = d3.groups(this.keyframes().flatMap(([, data]) => data), d => d.name);
-    this.nameframes = nameframes;
+    this.nameFrames = nameframes;
   }
 
   prevFrames(){
-    const prevFrames = new Map(this.nameframes.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
+    const prevFrames = new Map(this.nameFrames.flatMap(([, data]) => d3.pairs(data, (a, b) => [b, a])));
     this.prevFrames = prevFrames;
   }
 
   nextFrames(){
-    const nextFrames = new Map(nameframes.flatMap(([, data]) => d3.pairs(data)));
+    const nextFrames = new Map(this.nameFrames.flatMap(([, data]) => d3.pairs(data)));
     this.nextFrames = nextFrames;
   }
 
@@ -116,7 +127,7 @@ class Data{
       .selectAll("text");
 
     return ([date, data], transtion) => label = label
-      .data(this.rawData.slice(0, n), d => d.name)
+      .data(data.slice(0, n), d => d.name)
       .join(
         enter => enter.append("text")
           .attr("transform", d => `translate(${this.x((this.prevFrames.get(d) || d).value)},
@@ -141,9 +152,114 @@ class Data{
         .call(g => g.select("tspan"),tween("text", d => this.textTween((this.prevFrames.get(d) || d).value, d.value))));
   }
 
-  color(){
-    console.log("in color");
+  textTween(a, b){
+    const i = d3.interpolateNumber(a, b);
+    return function(t) {
+      this.textContent = formatNumber(i(t));
+    }
   }
+
+  formatNumber(){
+    d3.format(",d")
+  }
+
+  axis(svg){
+    const g = svg.append("g")
+      .attr("transform", `translate(0, ${this.margin.top})`);
+
+    const axis = d3.axisTop(this.x)
+      .ticks(this.width / 160)
+      .tickSizeOuter(0)
+      .tickSizeInner(-this.barSize * (this.n + this.y.padding())); 
+
+    return (_, transition) => {
+      g.transition(transition).call(axis);
+      g.select(".tick:first-of-type text").remove();
+      g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "white");
+      g.select(".domain").remove();
+    };
+  }
+
+  x(){
+    const x = d3.scaleLinear([0, 1], [this.margin.left, this.width - this.margin.right])
+    this.x = x
+  }
+
+  y(){
+    const y = d3.scaleBand()
+    .domain(d3.range(this.n + 1))
+    .rangeRound([this.margin.top, this.margin.top + this.barSize * (this.n + 1 + 0.1)])
+    .padding(0.1)
+    this.y = y
+  }
+
+  update(){
+    
+  }
+
+  renderChart(){
+    this.getNames()
+    this.groupDates()
+    this.keyframes()
+    this.nameFrames()
+    this.nextFrames()
+    this.prevFrames()
+    this.x()
+    this.y()
+    // this.height();
+    const svg = this.svg
+      .attr("viewBox", [0, 0, this.width, this.height]);
+
+    const updateBars = this.bars(svg);
+    console.log("bars updated")
+    const updateAxis = this.axis(svg);
+    console.log("axis updated")
+    const updateLabels = this.labels(svg);
+    console.log("labels updated")
+    // const updateTicker = this.ticker(svg);
+    
+    // yield svg.node();
+
+    // updateBars(this.keyframes[0][1])
+    // for (const keyframe of this.keyframes) {
+    //   const transition = svg.transition()
+    //       .duration(this.duration)
+    //       .ease(d3.easeLinear);
+
+  
+      x.domain([0, keyframe[1][0].value]);
+
+      updateAxis(keyframe, transition);
+      updateBars(keyframe, transition);
+      updateLabels(keyframe, transition);
+      // updateTicker(keyframe, transition);
+    // }
+  }
+
+  // ticker(svg){
+  //   const now = svg.append("text")
+  //     .style("font", `bold ${barSize}px var(--sans-serif)`)
+  //     .style("font-variant-numeric", "tabular-nums")
+  //     .attr("text-anchor", "end")
+  //     .attr("x", this.width - 6)
+  //     .attr("y", this.martgin.top + barSize * (this.n - 0,45))
+  //     .attr("dy", "0.32em")
+  //     .text(this.formatDate(this.keyframes[0][0]));
+
+  //   return ([date], transtion) => {
+  //     transition.end().then(() => now.text(this.formatDate(date)));
+  //   };
+  // }
+
+  // formatDate(){
+  //   d3.utcFormat("%Y")
+  // }
+
+
+  // color(){
+  //   console.log("in color");
+  // }
+
 
 
 }
