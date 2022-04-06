@@ -39,20 +39,22 @@ export function BarChartRace(chartId, extendedSettings) {
   chartContainer.attr("transform", `translate(${chartSettings.padding} ${chartSettings.padding})`);
 
   chartContainer.select(".current-date")
-    .attr("transform", `translate(${chartSettings.innerWidth} ${chartSettings.innerHeight})`);
+    .attr("transform", `translate(${chartSettings.innerWidth} ${chartSettings.innerHeight})`)
 
   function draw({ dataset, date: currentDate }, transition) {
-    const { innerHeight, ticksInXAxis, titlePadding } = chartSettings;
+    // const { innerHeight, ticksInXAxis, titlePadding } = chartSettings;
     const dataSetDescendingOrder = chartDataSets.sort(
       ({ value: firstValue }, { value: secondValue }) =>
         secondValue - firstValue
     );
 
+    chartContainer.select(".current-date").text(currentDate)
+
     xAxisScale.domain([0, dataSetDescendingOrder[0].value]);
     yAxisScale.domain(dataSetDescendingOrder.map(({name}) => name));
 
     xAxisContainer.transition(transition).call(
-      d3.axisTop(xAxisScale).ticks(ticksInXAxis).tickSize(-innerHeight));
+      d3.axisTop(xAxisScale).ticks(chartSettings.ticksInXAxis).tickSize(-innerHeight));
 
     yAxisContainer.transition(transition).call(d3.axisLeft(yAxisScale).tickSize(0));
 
@@ -65,67 +67,94 @@ export function BarChartRace(chartId, extendedSettings) {
       .enter()
       .append("g")
       .attr("class", "column-container")
-      .attr("transform", `translate(0, ${innerHeight})`);
+      .attr("transform", `translate(0, ${chartSettings.innerHeight})`);
 
     barGroupsEnter
       .append("rect")
       .attr("class", "column-rect")
       .attr("width", 0)
-      .attr("height", yAxisScale.step() * (1 - chartSettings.columnPadding))
+      .attr("height", yAxisScale.step() * (1 - chartSettings.columnPadding));
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-title")
       .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
-      .attr("x", -titlePadding)
+      .attr("x", -chartSettings.titlePadding)
       .text(({ name }) => name);
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-value")
       .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
-      .attr("x", titlePadding)
+      .attr("x", chartSettings.titlePadding)
       .text(0);
 
     const barUpdate = barGroupsEnter.merge(barGroups);
 
     barUpdate
       .transition(transition)
-      .attr("transform", ({ name }) => `translate(0, ${yAxisScale(name)})`)
-      .attr("fill", "normal");
+      .attr("transform", ({ name }) => `translate(0,${yAxisScale(name)})`)
+      .attr("fill", "black");
 
     barUpdate
       .select(".column-rect")
       .transition(transition)
-      .attr("width", ({ value }) => xAxisScale(value))
+      .attr("width", ({ value }) => xAxisScale(value));
 
     barUpdate
       .select(".column-title")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) - titlePadding);
+      .attr("x", ({ value }) => xAxisScale(value) - chartSettings.titlePadding);
 
     barUpdate
       .select(".column-value")
       .transition(transition)
-      .attr("x", ({value}) => xAxisScale(value) + titlePadding)
-      .tween("text", function({ value }) {
-        const interpolcateStartValue =
-          elapsedTime === chartSettings.duration ? this.currentValue || 0 : +this.innerHTML;
+      .attr("x", ({ value }) => xAxisScale(value) + chartSettings.titlePadding);
+      // .tween("text", function({ value }) {
+      //   const interpolateStartValue =
+      //     elapsedTime === chartSettings.duration 
+      //     ? this.currentValue || 0 : 
+      //     +this.innerHTML;
 
-        const interpolate = d3.interpolate(interpolcateStartValue, value);
-        this.currentValue = value;
+      //   const interpolate = d3.interpolate(interpolateStartValue, value);
+      //   this.currentValue = value;
 
-        return function(t) {
-          d3.select(this).text(Math.ceil(interpolate(t)));
-        };
-      });
+      //   return function(t) {
+      //     d3.select(this).text(Math.ceil(interpolate(t)));
+      //   };
+      // });
 
     const bodyExit = barGroups.exit();
 
     bodyExit
       .transition(transition)
       .attr("transform", `translate(0,${innerHeight})`)
-      .remove();
+      .on("end", function(){
+        d3.select(this).attr("fill", "none");
+      });
+
+    bodyExit
+      .select(".column-title")
+      .transition(transition)
+      .attr("x", 0);
+
+    bodyExit
+      .select(".column-rect")
+      .transition(transition)
+      .attr("width", 0);
+
+    bodyExit
+      .select(".column-value")
+      .transition(transition)
+      .attr("x", xAxisScale)
+      // .tween("text", function() {
+      //   const interpolate = d3.interpolate(this.currentValue, 0);
+      //   this.currentValue = 0;
+
+      //   return function(t) {
+      //     d3.select(this).text(Math.ceil(interpolate(t)));
+      //   };
+      // });
 
 
     return this;
