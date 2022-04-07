@@ -2,6 +2,7 @@ html,
 body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 button {
@@ -14,12 +15,14 @@ button {
 }
 
 svg {
-  margin: 40px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
 }
 
 .chart-container .chart-title {
   font-size: 18px;
-  fill: #d3d3d3;
+  fill: #4d4949;
   font-weight: bold;
   text-anchor: middle;
   dominant-baseline: center;
@@ -27,7 +30,7 @@ svg {
 
 .chart-container .current-date {
   font-size: 45px;
-  fill: #d3d3d3;
+  fill: #474747;
   text-anchor: end;
 }
 
@@ -42,11 +45,11 @@ svg {
 }
 
 .x-axis .tick text {
-  color: #d3d3d3;
+  color: #777777;
 }
 
 .columns .column-container .column-rect {
-  /* fill: tomato; */
+  fill-opacity: 0.8;
 }
 
 .columns .column-container .column-title {

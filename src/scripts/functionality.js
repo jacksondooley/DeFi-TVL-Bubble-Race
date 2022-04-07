@@ -7,7 +7,7 @@ class Example {
   }
 
   handleClick(){
-      this.ele.children[0].innerText = "Ouch!";
+      this.ele.children[0].innerText = "AHHHHHHHHHHH";
   }
 }
 

@@ -2,8 +2,8 @@ import * as d3 from "d3";
 
 export function BarChartRace(chartId, extendedSettings) {
   const chartSettings = {
-    width: 500,
-    height: 400,
+    width: 700,
+    height: 700,
     padding: 40,
     titlePadding: 5,
     columnPadding: 0.4,
@@ -61,7 +61,7 @@ export function BarChartRace(chartId, extendedSettings) {
     const barGroups = chartContainer
       .select(".columns")
       .selectAll("g.column-container")
-      .data(dataSetDescendingOrder, ({ name }) => name);
+      .data(dataSetDescendingOrder, ({ name }) => name + "    ");
 
     const barGroupsEnter = barGroups
       .enter()
@@ -80,7 +80,7 @@ export function BarChartRace(chartId, extendedSettings) {
       .attr("class", "column-title")
       .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
       .attr("x", -chartSettings.titlePadding)
-      .text(({ name }) => name);
+      .text(({ name }) => name );
 
     barGroupsEnter
       .append("text")
@@ -94,7 +94,7 @@ export function BarChartRace(chartId, extendedSettings) {
     barUpdate
       .transition(transition)
       .attr("transform", ({ name }) => `translate(0,${yAxisScale(name)})`)
-      .attr("fill", ({ category }) => colorBar(category));
+      .attr("fill", ({ category }) => colorBar(category))
 
     barUpdate
       .select(".column-rect")

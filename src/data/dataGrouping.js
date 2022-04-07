@@ -49,8 +49,8 @@ class Data{
     let data = this.rawData;
     console.log(data)
     let datevalues = Array.from(d3.rollup(data, ([d]) => d.tvlUSD, d => d.date, d => [d.name, d.category]))
-      // .map(([date, data]) => [date, data.])
-      // .sort(([a], [b]) => d3.ascending(a, b));
+      .map(([date, data]) => [date, data])
+      .sort(([a], [b]) => d3.ascending(a, b));
     console.log(datevalues)
     this.datevalues = datevalues
   }
