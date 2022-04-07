@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js"></script>
-    <title>Project Name</title>
+    <title>DeFi TVL Bubble Race</title>
+    <link rel="icon" href="src/images/icons8-happy-mac-64.png"> 
+    <!-- https://icons8.com/icon/set/computer-hardware/dusk -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-scale@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-axis@3"></script>
@@ -23,12 +25,47 @@
   <svg id="bar-chart-race">
     <g class="chart-container">
       <text class="chart-title"></text>
+      <g class="columns"></g>
       <g class="x-axis"></g>
       <g class="y-axis"></g>
-      <g class="columns"></g>
       <text class="current-date"></text>
     </g>
   </svg>
+  <ul class="legend">
+    <li>
+      <span class="dex"></span>
+      Dex
+    </li>
+    <li>
+      <span class="lending"></span>
+      Lending
+    </li>
+    <li>
+      <span class="bridge"></span>
+      Bridge
+    </li>
+    <li>
+      <span class="liquid-staking"></span>
+      Liquid Staking
+    </li>
+    <li>
+      <span class="yield"></span>
+      Yield
+    </li>
+    <li>
+      <span class="cdp"></span>
+      CDP
+    </li>
+    <li>
+      <span class="lending"></span>
+      Lending
+    </li>
+
+
+
+
+
+  </ul>
   <button>Stop</button>
 </body>
 

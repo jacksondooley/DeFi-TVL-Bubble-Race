@@ -72,7 +72,7 @@ export function BarChartRace(chartId, extendedSettings) {
     barGroupsEnter
       .append("rect")
       .attr("class", "column-rect")
-      .attr("width", 0)
+      .attr("width", ({ value }) => xAxisScale(value) - titlePadding)
       .attr("height", yAxisScale.step() * (1 - chartSettings.columnPadding));
 
     barGroupsEnter
@@ -85,7 +85,7 @@ export function BarChartRace(chartId, extendedSettings) {
     barGroupsEnter
       .append("text")
       .attr("class", "column-value")
-      .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
+      .attr("y", (yAxisScale.step() * (0.5 + chartSettings.columnPadding )) / 2)
       .attr("x", chartSettings.titlePadding)
       .text(0);
 
@@ -104,12 +104,12 @@ export function BarChartRace(chartId, extendedSettings) {
     barUpdate
       .select(".column-title")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) + titlePadding);
+      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10);
 
     barUpdate
       .select(".column-value")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) + chartSettings.titlePadding)
+      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10)
       .tween("text", function({ value }) {
         const interpolateStartValue =
           elapsedTime === chartSettings.duration 
@@ -162,13 +162,13 @@ export function BarChartRace(chartId, extendedSettings) {
 
   function colorBar(category){
     if (category === "Dexes") {
-      return "#4e79a7";
+      return "#f6ccbf";
     }
     else if (category === "Lending") {
-        return "#59a14f";
+        return "#a4fcf5";
     }
     else if (category === "Bridge") {
-        return "#af7aa1";
+        return "FF7F0E";
     }
     else if (category === "Liquid Staking") {
         return "#586EFC"; //Purple / Blue
@@ -177,7 +177,7 @@ export function BarChartRace(chartId, extendedSettings) {
         return "#2CFF53"; //Green
     }
     else if (category === "CDP") {
-        return "#B645E6"; //Purple
+        return "#82a9f9"; //Purple
     }
     else if (category === "Algo-Stables") {
         return "#FE4C4C"; //Red
@@ -186,7 +186,7 @@ export function BarChartRace(chartId, extendedSettings) {
         return "#45DDE6"; //light blue
     }
     else {
-        return "brown";
+        return "#cfc3fb";
     }
   }
 

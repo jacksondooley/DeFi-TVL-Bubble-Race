@@ -5,7 +5,8 @@ html,
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 button {
@@ -15,6 +16,7 @@ button {
   box-shadow: none;
   outline: none;
   cursor: pointer;
+  
 }
 
 svg {
@@ -44,7 +46,7 @@ svg {
 }
 
 .x-axis .tick line {
-  color: #d3d3d3;
+  color: #ffffff;
 }
 
 .x-axis .tick text {
@@ -56,17 +58,57 @@ svg {
 }
 
 .columns .column-container .column-title {
+  display: flex;
+  font-weight: bold;
   text-anchor: end;
-  fill: white;
-  dominant-baseline: middle;
+  fill: rgb(0, 0, 0);
+  dominant-baseline: top;
   font-size: 14px;
 }
 
 .columns .column-container .column-value {
-  dominant-baseline: middle;
+  text-anchor: end;
+  dominant-baseline: bottom;
   font-size: 14px;
   fill: black
 }
+
+.legend {
+  list-style: none;
+}
+
+.legend li {
+  float: left; margin-right: 10px;
+}
+
+.legend span {
+  border: 1px solid black; float: left; width: 12px; height: 12px; margin: 2px;
+}
+
+.legend .dex {
+  background-color: #f6ccbf;
+}
+
+.legend .lending {
+  background-color: #a4fcf5;
+}
+
+.legend .bridge {
+  background-color: #cfc3fb;
+}
+
+.legend .liquid-staking {
+  background-color: #cfc3fb;
+}
+
+.legend .yield {
+  background-color: #9467BD;
+}
+
+.legend .cdp {
+  background-color: #82a9f9;
+}
+
 
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
