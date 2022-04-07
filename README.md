@@ -1,7 +1,7 @@
-# DeFi-TVL-Visualizer
+# DeFi-TVL-Bubble-Chart-Race
 
 ## Background
-The DeFi-TVL-Visualizer is an data visualizer that uses a bar graph to view how TVL changes over time in the most prominent Ethereum based DeFi protocols. The top bar will be the one with the highest TVL while the bottom bar has the least. The bars will grow and shrink laterally as their individual data changes and the rankings of the bars will also change with their resepective values. The chart will start in January 2018 and progress up to march 2022. All of the bars TVL will be ranked in dollars.
+The DeFi-TVL-Bubble-Chart-Race is an data visualizer that uses a bar graph to view how the "total value locked" changes over time in the most prominent Ethereum based DeFi protocols. The top bar will be the one with the highest TVL while the bottom bar has the least. The bars will grow and shrink laterally as their individual data changes and the rankings of the bars will also change with their resepective values. The chart will start in January 2018 and progress up to march 2022. All of the bars TVL will be ranked in dollars.
 
 ## Functionality & MVPs
 In DeFi-TVL-Bar-Race Users will be able to:
@@ -22,7 +22,7 @@ In addition, this project will include:
 2. Visualizer
 3. Light/Dark Mode (Bonus)
 4. Play/Pause Button
-5. Slider to adjust date
+5. Legend
 6. Reset button
 7. Nav Links - Github, LinkedIn, Portfolio Website
 8. Chain Selector (bonus)
@@ -30,6 +30,7 @@ In addition, this project will include:
 ## Technologies, Libraries, APIs
 * D3.js used to render the bar chart
 * DeFiLlama APIs to get historical data
+* Python used to pull from APIs and save data to json
 
 ## Implementation Timeline
 * Friday: Setup project and get APIs working.
@@ -38,7 +39,7 @@ In addition, this project will include:
 * Monday: Get correct data for the project to make sure it works correctly.
 * Tuesday: Implement slider, pause button, and reset button.
 * Wednesday: Make aestetically pleasing and add lite/dark mode toggle. Add my information to project.
-* Thursday: Publish to Heroku.
+* Thursday: Publish to GitHub.
 
 ## Bonus Features
 * Hover over bar to see what the protocol TVL consists of
