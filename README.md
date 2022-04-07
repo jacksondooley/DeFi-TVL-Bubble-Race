@@ -39,7 +39,7 @@ In addition, this project will include:
 * Monday: Get correct data for the project to make sure it works correctly.
 * Tuesday: Implement slider, pause button, and reset button.
 * Wednesday: Make aestetically pleasing and add lite/dark mode toggle. Add my information to project.
-* Thursday: Publish to Heroku.
+* Thursday: Publish to GitHub.
 
 ## Bonus Features
 * Hover over bar to see what the protocol TVL consists of
