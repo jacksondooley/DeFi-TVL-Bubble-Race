@@ -72,7 +72,7 @@ export function BarChartRace(chartId, extendedSettings) {
     barGroupsEnter
       .append("rect")
       .attr("class", "column-rect")
-      .attr("width", ({ value }) => xAxisScale(value) - titlePadding)
+      .attr("width", 0)
       .attr("height", yAxisScale.step() * (1 - chartSettings.columnPadding));
 
     barGroupsEnter
@@ -117,7 +117,7 @@ export function BarChartRace(chartId, extendedSettings) {
           +this.innerHTML;
 
         const interpolate = d3.interpolate(interpolateStartValue, value);
-        this.currentValue = value;
+        this.currentValue = value ;
 
         return function(t) {
           d3.select(this).text(Math.ceil(interpolate(t)));
@@ -168,7 +168,7 @@ export function BarChartRace(chartId, extendedSettings) {
         return "#a4fcf5";
     }
     else if (category === "Bridge") {
-        return "FF7F0E";
+        return "#fffcb0";
     }
     else if (category === "Liquid Staking") {
         return "#586EFC"; //Purple / Blue
@@ -179,11 +179,11 @@ export function BarChartRace(chartId, extendedSettings) {
     else if (category === "CDP") {
         return "#82a9f9"; //Purple
     }
-    else if (category === "Algo-Stables") {
-        return "#FE4C4C"; //Red
+    else if (category === "Derivatives") {
+        return "#cfc3fb"; //Red
     }
     else if (category === "Yield Aggregator") {
-        return "#45DDE6"; //light blue
+        return "#ba728b"; //light blue
     }
     else {
         return "#cfc3fb";

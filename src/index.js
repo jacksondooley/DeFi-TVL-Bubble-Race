@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     myChart
       .setTitle("DeFi TVL Bar Chart Race")
       .addDatasets(ethData)
-      .render();
+      .render()
 
     d3Select("button").on("click", function() {
       if (this.innerHTML === "Stop") {

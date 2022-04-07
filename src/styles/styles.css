@@ -90,7 +90,7 @@ svg {
   background-color: #a4fcf5;
 }
 
-.legend .bridge {
+.legend .derivatives {
   background-color: #cfc3fb;
 }
 
@@ -98,11 +98,19 @@ svg {
   background-color: #cfc3fb;
 }
 
-.legend .yield {
-  background-color: #9467BD;
+.legend .bridge {
+  background-color: #fffcb0;
 }
 
 .legend .cdp {
   background-color: #82a9f9;
+}
+
+.legend .derivatives {
+  background-color: #cfc3fb;
+}
+
+.legend .yield-aggregator {
+  background-color: #ba728b;
 }
 
