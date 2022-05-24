@@ -43,10 +43,13 @@ export function BarChartRace(chartId, extendedSettings) {
 
   function draw({ dataSet, date: currentDate }, transition) {
     const { innerHeight, ticksInXAxis, titlePadding } = chartSettings;
-    const dataSetDescendingOrder = dataSet.sort(
+    let dataSetDescendingOrder = dataSet.sort(
       ({ value: firstValue }, { value: secondValue }) =>
         secondValue - firstValue
     );
+
+    console.log(dataSetDescendingOrder)
+    dataSetDescendingOrder = dataSetDescendingOrder.filter((el, idx) => idx <= 9)
 
     chartContainer.select(".current-date").text(currentDate)
 
@@ -73,7 +76,7 @@ export function BarChartRace(chartId, extendedSettings) {
       .append("rect")
       .attr("class", "column-rect")
       .attr("width", 0)
-      .attr("height", yAxisScale.step() * (1 - chartSettings.columnPadding));
+      .attr("height", 50);
 
     barGroupsEnter
       .append("text")
@@ -136,7 +139,8 @@ export function BarChartRace(chartId, extendedSettings) {
     bodyExit
       .select(".column-title")
       .transition(transition)
-      .attr("x", 0);
+      .attr("x", -50)
+
 
     bodyExit
       .select(".column-rect")
@@ -146,7 +150,7 @@ export function BarChartRace(chartId, extendedSettings) {
     bodyExit
       .select(".column-value")
       .transition(transition)
-      .attr("x", xAxisScale)
+      .attr("x", -50)
       .tween("text", function() {
         const interpolate = d3.interpolate(this.currentValue, 0);
         this.currentValue = 0;

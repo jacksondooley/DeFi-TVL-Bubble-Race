@@ -22,6 +22,10 @@ svg {
   justify-content: center;
 }
 
+.chart-column-title {
+  z-index: 3;
+}
+
 .chart-container .chart-title {
   font-size: 18px;
   fill: #4d4949;
