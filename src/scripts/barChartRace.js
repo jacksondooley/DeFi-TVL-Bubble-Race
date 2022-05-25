@@ -62,7 +62,7 @@ export function BarChartRace(chartId, extendedSettings) {
 
 
 
-    chartContainer.select(".current-date").text(currentDate)
+    chartContainer.select(".current-date").text(currentDate.slice(0, 7))
 
     xAxisScale.domain([0, dataSetDescendingOrder[0].value]);
     yAxisScale.domain(dataSetDescendingOrder.map(({name}) => name));
@@ -93,6 +93,7 @@ export function BarChartRace(chartId, extendedSettings) {
       .append("text")
       .attr("class", "column-title")
       .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
+      .attr("dy", "-0.25em")
       .attr("x", chartSettings.titlePadding - 10 + 150)
       .text(({ name }) => name );
 
@@ -118,7 +119,8 @@ export function BarChartRace(chartId, extendedSettings) {
     barUpdate
       .select(".column-title")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10 + 100);
+      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10 + 100)
+      .attr("dy", "-0.25em");
 
     barUpdate
       .select(".column-value")
@@ -134,7 +136,7 @@ export function BarChartRace(chartId, extendedSettings) {
         this.currentValue = value ;
 
         return function(t) {
-          d3.select(this).text(Math.ceil(interpolate(t)));
+          d3.select(this).text(new Intl.NumberFormat().format(Math.ceil(interpolate(t))));
         };
       });
 
@@ -167,7 +169,7 @@ export function BarChartRace(chartId, extendedSettings) {
         this.currentValue = 0;
 
         return function(t) {
-          d3.select(this).text(Math.ceil(interpolate(t)));
+          d3.select(this).text(new Intl.NumberFormat().format(Math.ceil(interpolate(t))));
         };
       });
 
