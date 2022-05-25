@@ -6,7 +6,7 @@ export function BarChartRace(chartId, extendedSettings) {
     height: 700,
     padding: 100,
     titlePadding: 5,
-    columnPadding: 0.4,
+    columnPadding: 0.5,
     ticksInXAxis: 5,
     duration: 5000,
     ...extendedSettings
@@ -92,15 +92,14 @@ export function BarChartRace(chartId, extendedSettings) {
     barGroupsEnter
       .append("text")
       .attr("class", "column-title")
-      .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
-      .attr("dy", "-0.25em")
+      .attr("y", "24px")
       .attr("x", chartSettings.titlePadding - 10 + 150)
       .text(({ name }) => name );
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-value")
-      .attr("y", (yAxisScale.step() * (0.5 + chartSettings.columnPadding )) / 2)
+      .attr("y", "40px")
       .attr("x", chartSettings.titlePadding - 10 + 150)
       .text(0);
 
@@ -120,7 +119,6 @@ export function BarChartRace(chartId, extendedSettings) {
       .select(".column-title")
       .transition(transition)
       .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10 + 100)
-      .attr("dy", "-0.25em");
 
     barUpdate
       .select(".column-value")
@@ -131,12 +129,14 @@ export function BarChartRace(chartId, extendedSettings) {
           elapsedTime === chartSettings.duration 
           ? this.currentValue || 0 : 
           +this.innerHTML;
+          // parseInt(this.innerHTML);
 
         const interpolate = d3.interpolate(interpolateStartValue, value);
         this.currentValue = value ;
 
         return function(t) {
-          d3.select(this).text(new Intl.NumberFormat().format(Math.ceil(interpolate(t))));
+          d3.select(this).text(Math.ceil(interpolate(t)));
+          // d3.select(this).text(new Intl.NumberFormat().format(Math.ceil(interpolate(t))));
         };
       });
 
