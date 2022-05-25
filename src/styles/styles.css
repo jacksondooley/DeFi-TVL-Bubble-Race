@@ -99,7 +99,7 @@ svg {
 }
 
 .legend .liquid-staking {
-  background-color: #cfc3fb;
+  background-color: #fbc3f4;
 }
 
 .legend .bridge {
@@ -110,11 +110,11 @@ svg {
   background-color: #82a9f9;
 }
 
-.legend .derivatives {
-  background-color: #cfc3fb;
-}
-
 .legend .yield-aggregator {
   background-color: #ba728b;
+}
+
+.legend .other {
+  background-color: #c3fbcb;
 }
 

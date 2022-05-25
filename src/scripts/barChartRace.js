@@ -4,7 +4,7 @@ export function BarChartRace(chartId, extendedSettings) {
   const chartSettings = {
     width: 1400,
     height: 700,
-    padding: 150,
+    padding: 100,
     titlePadding: 5,
     columnPadding: 0.4,
     ticksInXAxis: 5,
@@ -186,10 +186,7 @@ export function BarChartRace(chartId, extendedSettings) {
         return "#fffcb0";
     }
     else if (category === "Liquid Staking") {
-        return "#586EFC"; //Purple / Blue
-    }
-    else if (category === "Yield") {
-        return "#2CFF53"; //Green
+        return "#fbc3f4"; //Purple / Blue
     }
     else if (category === "CDP") {
         return "#82a9f9"; //Purple
@@ -201,7 +198,7 @@ export function BarChartRace(chartId, extendedSettings) {
         return "#ba728b"; //light blue
     }
     else {
-        return "#cfc3fb";
+        return "#c3fbcb";
     }
   }
 

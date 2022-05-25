@@ -29,6 +29,10 @@ svg {
   z-index: 3;
 }
 
+.chart-container {
+  border: 1px solid black;
+}
+
 .chart-container .chart-title {
   font-size: 18px;
   fill: #4d4949;
@@ -102,7 +106,7 @@ svg {
 }
 
 .legend .liquid-staking {
-  background-color: #cfc3fb;
+  background-color: #fbc3f4;
 }
 
 .legend .bridge {
@@ -113,12 +117,12 @@ svg {
   background-color: #82a9f9;
 }
 
-.legend .derivatives {
-  background-color: #cfc3fb;
-}
-
 .legend .yield-aggregator {
   background-color: #ba728b;
+}
+
+.legend .other {
+  background-color: #c3fbcb;
 }
 
 
