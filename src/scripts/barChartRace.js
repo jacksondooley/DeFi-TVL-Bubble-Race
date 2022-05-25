@@ -2,9 +2,9 @@ import * as d3 from "d3";
 
 export function BarChartRace(chartId, extendedSettings) {
   const chartSettings = {
-    width: 700,
+    width: 1400,
     height: 700,
-    padding: 40,
+    padding: 150,
     titlePadding: 5,
     columnPadding: 0.4,
     ticksInXAxis: 5,
@@ -13,7 +13,7 @@ export function BarChartRace(chartId, extendedSettings) {
   };
 
   chartSettings.innerWidth = chartSettings.width - chartSettings.padding * 2;
-  chartSettings.innerHeight = chartSettings.height - chartSettings.padding * 2;
+  chartSettings.innerHeight = chartSettings.height - chartSettings.padding;
   
   const chartDataSets = [];
   let chartTransition;
@@ -26,7 +26,7 @@ export function BarChartRace(chartId, extendedSettings) {
   const yAxisContainer = d3.select(`#${chartId} .y-axis`);
 
   const xAxisScale = d3.scaleLinear()
-    .range([0, chartSettings.innerWidth]);
+    .range([50, chartSettings.innerWidth]);
 
   const yAxisScale = d3.scaleBand()
     .range([0, chartSettings.innerHeight])
@@ -43,13 +43,24 @@ export function BarChartRace(chartId, extendedSettings) {
 
   function draw({ dataSet, date: currentDate }, transition) {
     const { innerHeight, ticksInXAxis, titlePadding } = chartSettings;
+
+
+
     let dataSetDescendingOrder = dataSet.sort(
       ({ value: firstValue }, { value: secondValue }) =>
         secondValue - firstValue
     );
+    dataSetDescendingOrder = dataSetDescendingOrder.filter((el, idx) => idx <= 9)
+    dataSetDescendingOrder = dataSetDescendingOrder.map((el, idx) => {
+      el["rank"] = idx
+      return el
+    })
+
+
 
     console.log(dataSetDescendingOrder)
-    dataSetDescendingOrder = dataSetDescendingOrder.filter((el, idx) => idx <= 9)
+
+
 
     chartContainer.select(".current-date").text(currentDate)
 
@@ -75,21 +86,21 @@ export function BarChartRace(chartId, extendedSettings) {
     barGroupsEnter
       .append("rect")
       .attr("class", "column-rect")
-      .attr("width", 0)
+      .attr("width", 150)
       .attr("height", 50);
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-title")
       .attr("y", (yAxisScale.step() * (1 - chartSettings.columnPadding)) / 2)
-      .attr("x", -chartSettings.titlePadding)
+      .attr("x", chartSettings.titlePadding - 10 + 150)
       .text(({ name }) => name );
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-value")
       .attr("y", (yAxisScale.step() * (0.5 + chartSettings.columnPadding )) / 2)
-      .attr("x", chartSettings.titlePadding)
+      .attr("x", chartSettings.titlePadding - 10 + 150)
       .text(0);
 
     const barUpdate = barGroupsEnter.merge(barGroups);
@@ -102,17 +113,17 @@ export function BarChartRace(chartId, extendedSettings) {
     barUpdate
       .select(".column-rect")
       .transition(transition)
-      .attr("width", ({ value }) => xAxisScale(value) - titlePadding);
+      .attr("width", ({ value }) => xAxisScale(value) + 100);
 
     barUpdate
       .select(".column-title")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10);
+      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10 + 100);
 
     barUpdate
       .select(".column-value")
       .transition(transition)
-      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10)
+      .attr("x", ({ value }) => xAxisScale(value) - titlePadding - 10 + 100)
       .tween("text", function({ value }) {
         const interpolateStartValue =
           elapsedTime === chartSettings.duration 
@@ -139,18 +150,18 @@ export function BarChartRace(chartId, extendedSettings) {
     bodyExit
       .select(".column-title")
       .transition(transition)
-      .attr("x", -50)
+      .attr("x", 150)
 
 
     bodyExit
       .select(".column-rect")
       .transition(transition)
-      .attr("width", 0);
+      .attr("width", 150);
 
     bodyExit
       .select(".column-value")
       .transition(transition)
-      .attr("x", -50)
+      .attr("x", 150)
       .tween("text", function() {
         const interpolate = d3.interpolate(this.currentValue, 0);
         this.currentValue = 0;
@@ -215,7 +226,7 @@ export function BarChartRace(chartId, extendedSettings) {
     return this;
   }
 
-  async function render(index = 0) {
+  async function render(index = -1) {
     currentDataSetIndex = index;
     timerStart = d3.now();
     chartTransition = chartContainer
@@ -233,6 +244,7 @@ export function BarChartRace(chartId, extendedSettings) {
       .on("interrupt", () => {
         timerEnd = d3.now();
       });
+
     if (index < chartDataSets.length) {
       draw(chartDataSets[index], chartTransition);
     }
