@@ -86,21 +86,21 @@ export function BarChartRace(chartId, extendedSettings) {
     barGroupsEnter
       .append("rect")
       .attr("class", "column-rect")
-      .attr("width", 150)
+      .attr("width", 100)
       .attr("height", 50);
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-title")
       .attr("y", "24px")
-      .attr("x", chartSettings.titlePadding - 10 + 150)
+      .attr("x", chartSettings.titlePadding - 10 + 100)
       .text(({ name }) => name );
 
     barGroupsEnter
       .append("text")
       .attr("class", "column-value")
       .attr("y", "40px")
-      .attr("x", chartSettings.titlePadding - 10 + 150)
+      .attr("x", chartSettings.titlePadding - 10 + 100)
       .text(0);
 
     const barUpdate = barGroupsEnter.merge(barGroups);
@@ -225,7 +225,7 @@ export function BarChartRace(chartId, extendedSettings) {
     return this;
   }
 
-  async function render(index = -1) {
+  async function render(index = 0) {
     currentDataSetIndex = index;
     timerStart = d3.now();
     chartTransition = chartContainer
@@ -247,7 +247,6 @@ export function BarChartRace(chartId, extendedSettings) {
     if (index < chartDataSets.length) {
       draw(chartDataSets[index], chartTransition);
     }
-    return this;
   }
   function stop() {
     d3.select(`#${chartId}`)
@@ -260,6 +259,10 @@ export function BarChartRace(chartId, extendedSettings) {
     render(currentDataSetIndex);
     return this;
   }
+  function restart() {
+    render(0)
+    return this;
+  }
 
   return {
     addDataset,
@@ -267,6 +270,7 @@ export function BarChartRace(chartId, extendedSettings) {
     render,
     setTitle,
     start,
-    stop
+    stop,
+    restart
   }
 };

@@ -46,6 +46,10 @@ svg {
   display: none;
 }
 
+.x-axis .tick:first-of-type {
+  display: none;
+}
+
 .x-axis .tick line {
   color: #ffffff;
 }
@@ -118,6 +122,11 @@ svg {
   background-color: #c3fbcb;
 }
 
+.button-grid {
+  display: flex;
+  flex-direction: row;
+}
+
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -167,4 +176,17 @@ svg {
   padding: 2px 16px;
   background-color: #5cb85c;
   color: white;
+}
+
+.icon-grid {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.icon-grid > a > img {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-right: 10px;
 }

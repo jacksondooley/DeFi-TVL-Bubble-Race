@@ -18,12 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
   myChart
     .setTitle("DeFi TVL Bar Chart Race")
     .addDatasets(ethData)
-    .render()
 
-  d3Select("button").on("click", function() {
+  d3Select(".play-button").on("click", function() {
     if (this.innerHTML === "Start") {
       this.innerHTML = "Stop"
-      myChart.start()
+      myChart.render()
     } else if (this.innerHTML === "Stop") {
       this.innerHTML = "Resume";
       myChart.stop();
@@ -36,8 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-    // let graph = new Bars();
-    // graph.createSample();
+  // d3Select(".restart-button").on("click", function() {
+  //   this.innerHTML = "Restart"
+  //   myChart.restart()
+  // });
+
 
 });
 

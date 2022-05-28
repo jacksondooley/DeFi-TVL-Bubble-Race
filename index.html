@@ -66,29 +66,33 @@
       Other
     </li>
   </ul>
-  <button>Start</button>
-  <!-- <div class="slidecontainer">
-    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-  </div> -->
-  <button id="modal-button">Instructions</button>
+  <div class="button-grid">
+    <button class="play-button">Start</button>
+    <!-- <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div> -->
+    <button id="modal-button">Instructions</button>
+  </div>
+
 
   <div id="instructions-modal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <span class="close">&times;</span>
-        <h2>Modal Header</h2>
+        <h2>DeFi Bar Chart Race</h2>
       </div>
       <div class="modal-body">
         <p>Some text in the Modal Body</p>
         <p>Some other text...</p>
       </div>
       <div class="modal-footer">
-        <h3>Modal Footer</h3>
+        <h3>Data from <a href="/defillama.com">defillama.com</a></h3>
       </div>
     </div>
 
   </div>
 
+  <!-- <button class="restart-button">Restart</button> -->
   <script>
     var modal = document.getElementById("instructions-modal");
 
@@ -115,10 +119,17 @@
       }
     }
   </script>
-
-  <a href="https://github.com/jacksondooley">
-    <img src="/src/images/github_logo_icon_143772.png" alt="git hub" style="width:42px">
-  </a>
+  <div class="icon-grid">
+    <a href="https://github.com/jacksondooley">
+      <img src="/src/images/github_logo_icon_143772.png" alt="git hub" style="width:50px">
+    </a>
+    <a href="https://jacksondooley.herokuapp.com/">
+      <img src="/src/images/portfolio-icon.png" alt="portfolio-icon" style="width:60px">
+    </a>
+    <a href="https://www.linkedin.com/in/jacksondooley/">
+      <img src="/src/images/linkedin-icon.png" alt="linked icon" style="width:50px">
+    </a>
+  </div>
 </body>
 
 </html>
