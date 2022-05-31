@@ -7,12 +7,12 @@ import Data from "./data/dataGrouping";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("DOMContent is Loaded");
+  // console.log("DOMContent is Loaded");
 
   const data = new Data();
   data.groupDates();
   const ethData = data.dataSetGroup();
-  console.log(ethData);
+  // console.log(ethData);
   const myChart = new BarChartRace("bar-chart-race");
 
   myChart

@@ -58,8 +58,6 @@ export function BarChartRace(chartId, extendedSettings) {
 
 
 
-    console.log(dataSetDescendingOrder)
-
 
 
     chartContainer.select(".current-date").text(currentDate.slice(0, 7))
