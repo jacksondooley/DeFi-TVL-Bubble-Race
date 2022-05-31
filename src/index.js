@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const myChart = new BarChartRace("bar-chart-race");
 
   myChart
-    .setTitle("DeFi TVL Bar Chart Race")
+    // .setTitle("DeFi TVL Bar Chart Race")
     .addDatasets(ethData)
 
   d3Select(".play-button").on("click", function() {

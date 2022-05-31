@@ -38,20 +38,20 @@ class Data{
   // gets names of all the protocols
   getNames(){
     this.names = new Set(this.rawData.map(d => d.name));
-    console.log(this.names)
+    // console.log(this.names)
   }
 
 //   // groups protocols and tvls by date
   groupDates(){
     const grouped = d3.groups(this.rawData, d => d.category);
-    console.log(grouped)
+    // console.log(grouped)
 
     let data = this.rawData;
-    console.log(data)
+    // console.log(data)/
     let datevalues = Array.from(d3.rollup(data, ([d]) => d.tvlUSD, d => d.date, d => [d.name, d.category]))
       .map(([date, data]) => [date, data])
       .sort(([a], [b]) => d3.ascending(a, b));
-    console.log(datevalues)
+    // console.log(datevalues)
     this.datevalues = datevalues
   }
 
