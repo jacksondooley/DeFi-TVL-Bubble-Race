@@ -1,12 +1,48 @@
 /*!*****************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/styles.css ***!
   \*****************************************************************************************************/
-html,
-body {
+header {
+  display: flex;
+  flex-direction: row;;
+  border-bottom: 1px solid #e7eaf3;
+  position: relative;
+  
+  z-index: 1;
+  box-shadow: 0 1px 10px rgb(151 164 175 / 10%);
+  justify-content: space-between;
+}
+
+
+header > h1 {
+  margin-left: 100px;
+  color: #474747;
+}
+
+header > .icon-grid {
+  margin-right: 100px;
+}
+
+main {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
+}
+
+main {
+  background-color: rgb(244, 244, 244);
+  min-height: 92vh;
+}
+
+.chart-background {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgb(227, 227, 227);
+  border-radius: 5px;
+  padding-bottom: 5px;
+  box-shadow: 0 0.5rem 1.2rem rgb(189 197 209 / 20%);
 }
 
 button {
@@ -16,7 +52,9 @@ button {
   box-shadow: none;
   outline: none;
   cursor: pointer;
-  
+  color: white;
+  background-color: #3498db;
+  margin-right: 5px;
 }
 
 svg {
@@ -27,6 +65,11 @@ svg {
 
 .chart-column-title {
   z-index: 3;
+}
+
+#bar-chart-race {
+  padding-right: 100px;
+  padding-bottom: 20px;
 }
 
 .chart-container .chart-title {
@@ -193,6 +236,10 @@ svg {
   align-self: center;
   margin-right: 10px;
 }
+
+/* footer {
+  background-color: #3498db;
+} */
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/

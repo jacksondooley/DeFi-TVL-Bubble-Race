@@ -16,119 +16,129 @@
 </head>
 
 <body>
-  
-  <main id="main"></main>
-  <ul id="list"></ul>
-  <div id="graph"></div>
-  <div></div>
-  <svg id="bar-chart-race">
-    <g class="chart-container">
-      <text class="chart-title"></text>
-      <line x1="-1" y1="20" x2="-1" y2="600" style="stroke:rgb(131, 131, 131);stroke-width:2" />
-      <g class="columns"></g>
-      <g class="x-axis"></g>
-      <g class="y-axis"></g>
-      <text class="current-date"></text>
-    </g>
-  </svg>
-  <ul class="legend">
-    <li>
-      <span class="dex"></span>
-      Dex
-    </li>
-    <li>
-      <span class="lending"></span>
-      Lending
-    </li>
-
-    <li>
-      <span class="derivatives"></span>
-      Derivatives
-    </li>
-    <li>
-      <span class="cdp"></span>
-      CDP
-    </li>
-    <li>
-      <span class="liquid-staking"></span>
-      Liquid Staking
-    </li>
-    <li>
-      <span class="yield-aggregator"></span>
-      Yield Aggregator
-    </li>
-    <li>
-      <span class="bridge"></span>
-      Bridge
-    </li>
-    <li>
-      <span class="other"></span>
-      Other
-    </li>
-  </ul>
-  <div class="button-grid">
-    <button class="play-button">Start</button>
-    <!-- <div class="slidecontainer">
-      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    </div> -->
-    <button id="modal-button">About</button>
-  </div>
-
-
-  <div id="instructions-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close">&times;</span>
-        <h2>DeFi Bar Chart Race</h2>
+  <header>
+      <!-- <img class="top" src="/src/images/topography.svg"> -->
+      <h1>DeFi TVL Bar Chart Race</h1>
+      <div class="icon-grid">
+        <a href="https://github.com/jacksondooley">
+          <img src="/src/images/github_logo_icon_143772.png" alt="git hub" style="width:50px">
+        </a>
+        <a href="https://jacksondooley.herokuapp.com/">
+          <img src="/src/images/portfolio-icon.png" alt="portfolio-icon" style="width:60px">
+        </a>
+        <a href="https://www.linkedin.com/in/jacksondooley/">
+          <img src="/src/images/linkedin-icon.png" alt="linked icon" style="width:50px">
+        </a>
       </div>
-      <div class="modal-body">
-        <p>DeFi TVL Bar Chart Race is an interactive data visualiztion app for the total value locked in decentralized finance protocols on the Ethereum blockchain.</p>
+  </header>
+  <main id="main">
+    <div class="chart-background">
+      <svg id="bar-chart-race">
+        <g class="chart-container">
+          <text class="chart-title"></text>
+          <line x1="-1" y1="20" x2="-1" y2="600" style="stroke:rgb(131, 131, 131);stroke-width:2" />
+          <g class="columns"></g>
+          <g class="x-axis"></g>
+          <g class="y-axis"></g>
+          <text class="current-date"></text>
+        </g>
+      </svg>
+      <ul class="legend">
+        <li>
+          <span class="dex"></span>
+          Dex
+        </li>
+        <li>
+          <span class="lending"></span>
+          Lending
+        </li>
+
+        <li>
+          <span class="derivatives"></span>
+          Derivatives
+        </li>
+        <li>
+          <span class="cdp"></span>
+          CDP
+        </li>
+        <li>
+          <span class="liquid-staking"></span>
+          Liquid Staking
+        </li>
+        <li>
+          <span class="yield-aggregator"></span>
+          Yield Aggregator
+        </li>
+        <li>
+          <span class="bridge"></span>
+          Bridge
+        </li>
+        <li>
+          <span class="other"></span>
+          Other
+        </li>
+      </ul>
+      <div class="button-grid">
+        <button class="play-button">Start</button>
+        <!-- <div class="slidecontainer">
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div> -->
+        <button id="modal-button">About</button>
       </div>
-      <div class="modal-footer">
-        <h3>Data from <a href="https://defillama.com/">defillama.com</a></h3>
+
+
+      <div id="instructions-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>DeFi Bar Chart Race</h2>
+          </div>
+          <div class="modal-body">
+            <p>
+              An interactive data visualiztion app for the total value locked in decentralized finance protocols on the Ethereum blockchain. 
+              This app was built using vanilla JavaScript and the D3.JS library. 
+              The data was fetched and cleansed using a python script.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <h3>Data from <a href="https://defillama.com/">defillama.com</a></h3>
+          </div>
+        </div>
+
       </div>
+
+      <!-- <button class="restart-button">Restart</button> -->
+      <script>
+        var modal = document.getElementById("instructions-modal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("modal-button");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      </script>
     </div>
-
-  </div>
-
-  <!-- <button class="restart-button">Restart</button> -->
-  <script>
-    var modal = document.getElementById("instructions-modal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("modal-button");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
-  <div class="icon-grid">
-    <a href="https://github.com/jacksondooley">
-      <img src="/src/images/github_logo_icon_143772.png" alt="git hub" style="width:50px">
-    </a>
-    <a href="https://jacksondooley.herokuapp.com/">
-      <img src="/src/images/portfolio-icon.png" alt="portfolio-icon" style="width:60px">
-    </a>
-    <a href="https://www.linkedin.com/in/jacksondooley/">
-      <img src="/src/images/linkedin-icon.png" alt="linked icon" style="width:50px">
-    </a>
-  </div>
+  </main>
+  <footer>
+   
+  </footer>
 </body>
 
 </html>
