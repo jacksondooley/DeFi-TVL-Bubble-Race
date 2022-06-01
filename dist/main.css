@@ -191,7 +191,7 @@ svg {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
-  padding: 2px;
+  padding: 10px;
   width: 30%; /* Could be more or less, depending on screen size */
   border: 1px solid black;
   border-radius: 5px;

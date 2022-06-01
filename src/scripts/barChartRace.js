@@ -3,7 +3,7 @@ import * as d3 from "d3";
 export function BarChartRace(chartId, extendedSettings) {
   const chartSettings = {
     width: 1400,
-    height: 700,
+    height: 650,
     padding: 100,
     titlePadding: 5,
     columnPadding: 0.5,
@@ -13,7 +13,7 @@ export function BarChartRace(chartId, extendedSettings) {
   };
 
   chartSettings.innerWidth = chartSettings.width - chartSettings.padding * 2;
-  chartSettings.innerHeight = chartSettings.height - chartSettings.padding;
+  chartSettings.innerHeight = chartSettings.height - chartSettings.padding * 2;
   
   const chartDataSets = [];
   let chartTransition;
