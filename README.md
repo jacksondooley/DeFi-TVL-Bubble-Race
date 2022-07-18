@@ -1,28 +1,19 @@
 # DeFi-TVL-Bubble-Chart-Race
 https://jacksondooley.github.io/DeFi-TVL-Bubble-Race/
 
-# Contents
-
-* Background
-* Built With
-* Functinoality
-* Feature Highlights
-* Wireframes
-* Features in development
-
-# Description
+## Description
 The DeFi-TVL-Bubble-Chart-Race is an data visualizer that uses a bar graph to view how the "total value locked" changes over time in the most prominent Ethereum based DeFi protocols. The top bar will be the one with the highest TVL while the bottom bar has the least. The bars will grow and shrink laterally as their individual data changes and the rankings of the bars will also change with their resepective values. The chart will start in January 2018 and progress up to march 2022. All of the bars TVL will be ranked in dollars.
 
-# Language and Technologies
+## Language and Technologies
 
 * Vanilla JavaScript
 * HTML5/CSS
 * D3JS
 * Webpack
 
-# Layout
+## Layout
 
-# Code Snippets
+## Code Snippets
 
 ## Functionality & MVPs
 In DeFi-TVL-Bar-Race Users will be able to:
@@ -66,4 +57,4 @@ In addition, this project will include:
 * Hover over bar to see what the protocol TVL consists of
 * Add ability to make chart denominate TVL in ETH/BTC
 * Add functionality to view other chains
-# DeFi-TVL-Bubble-Race
+
