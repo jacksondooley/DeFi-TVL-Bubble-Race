@@ -1,18 +1,12 @@
 
 ToDo:
 
-* Get Bars to render
-* Get Bars to change size
-* Get Bars to Race
-* Add Play/Pause button
+
 * Add Reset button
 * Add date slider
 * Add yams data
-* Prettify
-* Nav links
 * Dark/Light Mode
 * Chain Selector
-* Use observablehq libary to make width adaptive to screen size
 
 Done:
 * Insert data

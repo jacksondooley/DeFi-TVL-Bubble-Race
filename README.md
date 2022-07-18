@@ -1,8 +1,8 @@
-# DeFi-TVL-Bubble-Chart-Race
-https://jacksondooley.github.io/DeFi-TVL-Bubble-Race/
+# DeFi-TVL-Bar-Chart-Race
+
 
 ## Description
-The DeFi-TVL-Bubble-Chart-Race is an data visualizer that uses a bar graph to view how the "total value locked" changes over time in the most prominent Ethereum based DeFi protocols. The top bar will be the one with the highest TVL while the bottom bar has the least. The bars will grow and shrink laterally as their individual data changes and the rankings of the bars will also change with their resepective values. The chart will start in January 2018 and progress up to march 2022. All of the bars TVL will be ranked in dollars.
+The [DeFi-TVL-Bar-Chart-Race](https://jacksondooley.github.io/DeFi-TVL-Bubble-Race/) is a data visualizer that uses a bar graph to view how the "total value locked" changes over time in the most prominent Ethereum based DeFi protocols. The top bar will be the one with the highest TVL while the bottom bar has the least. The bars will grow and shrink laterally as their individual data changes and the rankings of the bars will also change with their resepective values. The chart will start in January 2020 and progress up to April 2022. All of the bars TVL will be ranked in dollars.
 
 ## Language and Technologies
 
@@ -10,8 +10,14 @@ The DeFi-TVL-Bubble-Chart-Race is an data visualizer that uses a bar graph to vi
 * HTML5/CSS
 * D3JS
 * Webpack
+* DeFiLlama APIs
 
 ## Layout
+![Main Screen](/DeFi-TVL-Bubble-Race-Animation.png)
+The Bar Chart Race
+
+![About Modal](/DeFi-TVL-Bubble-Race-Home.png)
+About Modal
 
 ## Code Snippets
 
@@ -20,7 +26,6 @@ In DeFi-TVL-Bar-Race Users will be able to:
 * Start, pause, and reset visualizer
 * Visualize the name protocols and their TVL as it changes in time
 * Visualize the rankings of protocols change
-* Toggle between light mode and dark mode
         
 In addition, this project will include:
 * A production README
@@ -39,10 +44,6 @@ In addition, this project will include:
 7. Nav Links - Github, LinkedIn, Portfolio Website
 8. Chain Selector (bonus)
 
-## Technologies, Libraries, APIs
-* D3.js used to render the bar chart
-* DeFiLlama APIs to get historical data
-* Python used to pull from APIs and save data to json
 
 ## Implementation Timeline
 * Friday: Setup project and get APIs working.
