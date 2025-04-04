@@ -1,16 +1,20 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
-  entry: [
-    path.resolve(__dirname, 'src', 'index.ts'),
-    path.resolve(__dirname, 'src', 'index.scss'),
-  ],
+  entry: {
+    main: [
+      path.resolve(__dirname, 'src', 'index.ts'),
+      path.resolve(__dirname, 'src', 'index.scss'),
+    ]
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     clean: true,
+    publicPath: './'
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -47,8 +51,17 @@ const config = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './index.html'
-    })
+      template: './index.html',
+      publicPath: './'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { 
+          from: "src/images",
+          to: "images"
+        }
+      ],
+    }),
   ],
 };
 
