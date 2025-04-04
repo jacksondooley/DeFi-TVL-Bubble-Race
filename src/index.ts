@@ -13,18 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
   myChart
     .addDatasets(ethData)
 
-  d3Select(".play-button").on("click", function() {
-    if (this.innerHTML === "Start") {
-      this.innerHTML = "Stop"
+  d3Select(".play-button").on("click", (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    if (button.innerHTML === "Start") {
+      button.innerHTML = "Stop"
       myChart.render()
-    } else if (this.innerHTML === "Stop") {
-      this.innerHTML = "Resume";
+    } else if (button.innerHTML === "Stop") {
+      button.innerHTML = "Resume";
       myChart.stop();
-    } else if (this.innerHTML === "Resume") {
-      this.innerHTML = "Stop";
+    } else if (button.innerHTML === "Resume") {
+      button.innerHTML = "Stop";
       myChart.start();
     } else {
-      this.innerHTML = "Stop";
+      button.innerHTML = "Stop";
       myChart.render();
     }
   });

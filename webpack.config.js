@@ -1,17 +1,31 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   entry: [
-    path.resolve(__dirname, 'src', 'index.js'),
+    path.resolve(__dirname, 'src', 'index.ts'),
     path.resolve(__dirname, 'src', 'index.scss'),
   ],
   output: {
-    path: path.join(__dirname, 'dist'), // bundled file in dist/
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
+    clean: true,
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+  devServer: {
+    port: 8080,
+    static: './dist',
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.js$/, // applies to js files
         use: ['babel-loader'], // transpiles your js
@@ -30,7 +44,12 @@ const config = {
       }
     ],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    })
+  ],
 };
 
 module.exports = (env, argv) => {
